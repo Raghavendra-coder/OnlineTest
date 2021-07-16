@@ -115,13 +115,19 @@ def schedule_test(request):
     if request.method == 'POST' and 'test-submit' in request.POST:
         t_form = TestForm(request.POST)
         url = reverse('schedule_test')
-
+        print("888")
         if t_form.is_valid():
+            print("000")
             test = t_form.save(commit=False)
             test.slug = slugify(t_form.cleaned_data['test_name'])
             test.save()
             params = "?test=" + test.slug
             return HttpResponseRedirect(url + params)
+        else:
+            print("nnn")
+    else:
+        print("kkk")
+
 
     context = {
         't_form': t_form,
