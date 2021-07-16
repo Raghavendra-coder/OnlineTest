@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/test_page.css' %}">
+    <title>Test Page</title>
+  </head>
+  <body>
+     <div class="container">
+         <div class="row" style="padding-top: 80px;">
+            <div class="main-div my-4 col-md-12"> 
+             <div class="main-content">
+                 <div class="text-center">
+                    <h1 style="background-color: rgb(255, 255, 255);"><img src="{% static 'images/summachar.png' %}"></h1>
+                 </div>
+                 <div class="all-tests row">
+                    {% for i in test %}
+                    <div class="test-name col-md-5" style="max-height: 150px;">
+                        <h4>{{ i.test_name }}<h6 style="margin: 10px;">({{ i.test_date }})</h6></h4>                                        
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="{% url 'start_test' pk=i.pk %}" class="btn btn-outline-success">Start</a>
+                                {% if i.status %}<span style="color: red; font-size: 10px;">Started</span>{% else %}<span></span>{% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{% url 'pause_test' pk=i.pk %}" class="btn btn-outline-warning">Pause</a>
+                                {% if not i.status %}<span style="color: orange; font-size: 10px;">Paused</span>{% else %}<span></span>{% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{% url 'report' pk=i.pk %}" class="btn btn-outline-dark">Report</a>   
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{% url 'delete_test' pk=i.pk %}" class="btn btn-outline-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                 </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <a href="{% url 'admin_homepage' %}" class="btn btn-outline-success">Home</a>
+                    </div>
+    
+                     <div class="col-md-5 text-end">
+                         <a href="{% url 'schedule_test' %}" class="btn btn-outline-info">New Test</a>
+                     </div>
+                </div>
+             </div>
+            </div>
+         </div>
+     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    
+    
+    
+  </body>
+</html>
